@@ -1,32 +1,43 @@
 <template>
-  <div id="app">
-    <div id="nav">
-      <router-link to="/">Home</router-link> |
-      <router-link to="/about">About</router-link>
-    </div>
+  <div id="app" class="match-parent">
     <router-view/>
   </div>
 </template>
 
 <style lang="scss">
-#app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
+*{
+  box-sizing: border-box;
+  font-family: 'Nunito', sans-serif;
+  transition: all 0.3s ;
+}
+html, body{
+  width: 100%;
+  height: 100%;
+  font-size: 16px;
+  overflow-x: hidden;
+  margin: 0;
+  padding: 0;
 }
 
-#nav {
-  padding: 30px;
-
-  a {
-    font-weight: bold;
-    color: #2c3e50;
-
-    &.router-link-exact-active {
-      color: #42b983;
+.match-parent{
+  width: 100%;
+  height: 100%;
+}
+.x-btn{
+    border: none;
+    padding: 8px 20px;
+    margin-top: 10px;
+    border-radius: 3px;
+    box-shadow: 0px 2px 2px #ccc;
+    text-transform: uppercase;
+    font-size: 0.75em;
+    font-weight: 600;
+    background-color: dodgerblue;
+    color: #fdfdfd;
+    outline: none;
+    &:hover{
+        background-color: darken($color: dodgerblue, $amount: 8);
     }
-  }
 }
+
 </style>
