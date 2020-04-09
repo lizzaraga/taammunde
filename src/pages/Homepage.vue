@@ -40,7 +40,7 @@ import Modal from '../components/Modal.vue'
 export default Vue.extend({
    data(){
        return {
-           displayLogin: true
+           displayLogin: false
        }
    },
    components:{
@@ -60,35 +60,34 @@ export default Vue.extend({
 </script>
 
 <style lang="scss" scoped>
+
 #homepage{
-   
-}
-.welcome{
-    position: fixed;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    .welcome-message{
-        font-size: 2.5em;
-        font-weight: 100;
+    background-color: transparent;
+    .welcome{
+        position: fixed;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        .welcome-message{
+            font-size: 2.5em;
+            font-weight: 100;
+        }
+        .app-title{
+            font-size: 1.6em;
+            font-weight: 800;
+        }
     }
-    .app-title{
-        font-size: 1.6em;
-        font-weight: 800;
-    }
-}
-#login-form{
-    padding: 10px;
-    margin-top: 20px;
-}
-.form-group{
-    label{
-        font-weight: 600;
+
+    .form-group{
+        label{
+            font-weight: 600;
+        }
     }
 }
+
 
 .mute-link{
     font-size: 0.8em;

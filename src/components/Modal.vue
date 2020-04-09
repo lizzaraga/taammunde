@@ -1,27 +1,31 @@
 <template>
-    <div class="x-modal-backdrop" @click.self="closeModal" v-show="isVisible">
-        <div class="x-modal">
-            <header>
-                <slot name="header">
-                    <div class="default">
-                        <span>{{title}}</span>
-                        <button class="material-icons modal-close-btn" @click="closeModal">
-                           close
-                        </button>
-                    </div>
-                </slot>
-                
-            </header>
+    <transition name="fade">
+        <div class="x-modal-backdrop" @click.self="closeModal" v-show="isVisible">
+            <transition name="up" appear>
+                <div class="x-modal" v-show="showInnerModal">
+                    <header>
+                        <slot name="header">
+                            <div class="default">
+                                <span>{{title}}</span>
+                                <button class="material-icons modal-close-btn" @click="closeModal">
+                                close
+                                </button>
+                            </div>
+                        </slot>
+                        
+                    </header>
 
-            <main>
-                <slot></slot>
-            </main>
+                    <main>
+                        <slot></slot>
+                    </main>
 
-            <footer>
-                <slot name="footer"></slot>
-            </footer>
+                    <footer>
+                        <slot name="footer"></slot>
+                    </footer>
+                </div>
+            </transition>
         </div>
-    </div>
+    </transition>
 </template>
 
 <script lang='ts'>
@@ -33,7 +37,12 @@ export default Vue.extend({
     },
     data(){
         return {
-           
+            showInnerModal: false
+        }   
+    },
+    watch:{
+        isVisible(n, o){
+            this.showInnerModal = n;
         }
     },
     methods:{
@@ -42,6 +51,9 @@ export default Vue.extend({
         }
     },
     
+    mounted(){
+        console.log("mount")
+    }
 })
 </script>
 
@@ -61,21 +73,31 @@ export default Vue.extend({
         position: relative;
         background-color: #fff;
         width: 400px;
-        border-radius: 0.5em;
-        padding: 10px 0;
+        border-radius:3px;
+        display: flex;
+        flex-direction: column;
     
         header{
+           
             .default{
                 display: flex;
                 justify-content: space-between;
                 align-items: center;
-                padding: 0 10px;
-
+                height: 55px;
+                padding: 0 15px;
+                border-bottom: 1px solid #eee;
+               
                 span{
                     font-size: 1.8em;
-                    font-weight: 800;
+                    font-weight: 600;
+                    color: #555;
                 }
             }
+        }
+        main{
+            width: 100%;
+            height: 100%;
+            padding: 15px;
         }
     }
     
@@ -87,12 +109,28 @@ export default Vue.extend({
     border-radius: 50%;
     font-size: 18px;
     outline: none;
-    background-color: transparent;
     font-weight: bold;
+    color: #aaa;
+    background-color: transparent;
 
     &:hover{
         color: crimson;
     }
+}
+
+.fade-enter, .fade-leave-to{
+    opacity: 0;
+}
+.fade-enter-active, .fade-leave-active{
+    transition: opacity 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+
+.up-enter, .up-leave-to{
+    opacity: 0;
+    transform: scale(1.3);
+}
+.up-enter-active, .up-leave-active{
+    transition: opacity 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94), transform 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94);
 }
 
 </style>
