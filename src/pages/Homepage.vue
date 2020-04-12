@@ -8,7 +8,7 @@
         <div class="welcome">
             <span class="welcome-message">Welcome to</span>
             <span class="app-title">Taammunde</span>
-            <button class="x-btn">Go to dashboard</button>
+            <x-button>Go to dashboard</x-button>
         </div>
 
         <modal title = "Log in" @close = "onHideLogin" :isVisible="displayLogin">
@@ -28,7 +28,7 @@
                         <option value="manager">Manager</option>
                     </select>
                 </div>
-                <button class="x-btn">SIGN IN</button>
+                <x-button>SIGN IN</x-button>
             </form>
         </modal>
     </div>
@@ -37,6 +37,7 @@
 <script lang="ts">
 import Vue from 'vue'
 import Modal from '../components/Modal.vue'
+import XButton from '../components/XButton.vue'
 export default Vue.extend({
    data(){
        return {
@@ -44,7 +45,8 @@ export default Vue.extend({
        }
    },
    components:{
-       Modal
+       Modal,
+       XButton
    },
    methods:{
        onDisplayLogin(e: Event){

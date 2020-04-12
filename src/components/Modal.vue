@@ -3,7 +3,7 @@
         <div class="x-modal-backdrop" @click.self="closeModal" v-show="isVisible">
             <transition name="up" appear>
                 <div class="x-modal" v-show="showInnerModal">
-                    <header>
+                    <header  v-if="showHeader">
                         <slot name="header">
                             <div class="default">
                                 <span>{{title}}</span>
@@ -19,7 +19,7 @@
                         <slot></slot>
                     </main>
 
-                    <footer>
+                    <footer v-if="showFooter">
                         <slot name="footer"></slot>
                     </footer>
                 </div>
@@ -33,7 +33,9 @@ import Vue from 'vue'
 export default Vue.extend({
     props:{
         isVisible:{type: Boolean, default: true},
-        title : {type: String}
+        title : {type: String},
+        showHeader: {type: Boolean, default: true},
+        showFooter: {type: Boolean, default: true}
     },
     data(){
         return {

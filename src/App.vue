@@ -23,21 +23,6 @@ html, body{
   width: 100%;
   height: 100%;
 }
-.x-btn{
-    border: none;
-    padding: 8px 20px;
-    margin-top: 10px;
-    border-radius: 3px;
-    box-shadow: 0px 2px 2px #ccc;
-    text-transform: uppercase;
-    font-size: 0.75em;
-    font-weight: 600;
-    background-color: dodgerblue;
-    color: #fdfdfd;
-    outline: none;
-    &:hover{
-        background-color: darken($color: dodgerblue, $amount: 8);
-    }
-}
+
 
 </style>
