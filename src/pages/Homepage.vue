@@ -7,28 +7,28 @@
         </div>
         <div class="welcome">
             <span class="welcome-message">Welcome to</span>
-            <span class="app-title">Taammunde</span>
-            <x-button>Go to dashboard</x-button>
+            <span class="app-title">Taammunde </span>
+            <x-button  @click="goToDashboard">Go to dashboard</x-button>
         </div>
 
         <modal title = "Log in" @close = "onHideLogin" :isVisible="displayLogin">
             <form action="" id="login-form">
                 <div class="form-group">
                     <label for="">Email</label>
-                    <input type="email" class="form-control" required>
+                    <input v-model="loginForm.email" type="email" class="form-control" required>
                 </div>
                 <div class="form-group">
                     <label for="">Password</label>
-                    <input type="password" class="form-control" required>
+                    <input v-model="loginForm.password" type="password" class="form-control" required>
                 </div>
                 <div class="form-group">
                     <label for="">Type user</label>
-                    <select class="form-control">
+                    <select class="form-control" v-model="loginForm.typeUser">
                         <option value="administrator">Administrator</option>
                         <option value="manager">Manager</option>
                     </select>
                 </div>
-                <x-button>SIGN IN</x-button>
+                <x-button @click="loginUser(loginForm)">SIGN IN</x-button>
             </form>
         </modal>
     </div>
@@ -38,25 +38,55 @@
 import Vue from 'vue'
 import Modal from '../components/Modal.vue'
 import XButton from '../components/XButton.vue'
+import {createNamespacedHelpers} from 'vuex'
+import { ILoginForm, ETypeUser } from '../store/modules/Auth/types'
+
+const {mapState, mapGetters, mapActions} = createNamespacedHelpers('auth')
 export default Vue.extend({
-   data(){
+   data():{displayLogin: boolean, loginForm: ILoginForm}{
        return {
-           displayLogin: false
+           displayLogin: false,
+           loginForm:{
+               email: '',
+               password: '',
+               typeUser: ETypeUser.Administrator
+           }
        }
+   },
+   computed:{
+       ...mapState([
+           "isLogging",
+            "errors"
+       ])
    },
    components:{
        Modal,
        XButton
    },
    methods:{
-       onDisplayLogin(e: Event){
-           e.preventDefault()
-           this.displayLogin = true
-          
-       },
-       onHideLogin(){
-           this.displayLogin = false
-       }
+        onDisplayLogin(e: Event){
+            e.preventDefault()
+            this.displayLogin = true
+            
+        },
+        onHideLogin(){
+            this.displayLogin = false
+        },
+        goToDashboard(){
+            const managerToken = "taammunde_token_manager"
+            if(this.$cookies.isKey(managerToken)){
+                this.$router.push({name: 'Managerpage', params : {token : this.$cookies.get(managerToken)}})
+            }
+            const adminToken = "taammunde_token_administrator"
+            if(this.$cookies.isKey(adminToken)){
+                this.$router.push({name: 'Adminpage', params : {token : this.$cookies.get(adminToken)}})
+            }
+            this.displayLogin = true
+            alert("Please login before ...")
+        },
+        ...mapActions([
+            "loginUser"
+        ])
    }
 })
 </script>

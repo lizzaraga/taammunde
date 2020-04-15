@@ -1,5 +1,5 @@
 <template>
-    <button class="x-btn" :class="className" @mouseup="onMouseUp" @mousedown="onMouseDown">
+    <button class="x-btn" v-on="$listeners" :class="className" @mouseup="onMouseUp" @mousedown="onMouseDown">
         <slot></slot>
     </button>
 </template>

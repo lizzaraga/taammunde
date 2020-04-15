@@ -1,6 +1,6 @@
 <template>
 <div id="managerpage">
-    
+    <h2>Manager page</h2>
 </div>
 </template>
 <script lang="ts">
